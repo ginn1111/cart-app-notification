@@ -1,0 +1,22 @@
+@use '../../styles' as *;
+
+.button {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: $rounded-sm;
+  text-align: center;
+  &:hover {
+    filter: brightness(95%);
+    cursor: pointer;
+  }
+}
+.button.primary {
+  color: $white;
+  background-color: $primary;
+}
+.button.outline {
+  color: $primary;
+  background-color: $white;
+  border: 1px solid $primary;
+}

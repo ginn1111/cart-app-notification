@@ -1,0 +1,28 @@
+@use '../../styles' as *;
+
+.btn {
+  display: flex;
+  input {
+    display: block;
+    width: 100%;
+    flex: 1;
+    border: 1px solid $text;
+    font-size: 12px;
+    padding-inline: 4px;
+    text-align: center;
+  }
+  button {
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 8px 16px;
+    border: 1px solid $text;
+    text-align: center;
+    &:first-child {
+      border-radius: $rounded-sm 0 0 $rounded-sm;
+    }
+    &:last-child {
+      border-radius: 0 $rounded-sm $rounded-sm 0;
+    }
+  }
+}

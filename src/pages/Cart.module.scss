@@ -1,0 +1,16 @@
+@use '../styles/' as *;
+
+.cart {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  &__list {
+    &__header {
+      display: flex;
+      justify-content: space-evenly;
+
+      li {
+        width: 100%;
+      }
+    }
+  }
+}

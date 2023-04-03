@@ -1,0 +1,9 @@
+@use '../../../../styles/' as *;
+
+.isActive {
+  padding-block: 8px;
+  color: $primary;
+  border-bottom-style: solid;
+  border-bottom-color: $primary;
+  border-bottom-width: 2px;
+}

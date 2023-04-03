@@ -1,0 +1,22 @@
+@use '../../../styles/' as *;
+
+.header {
+  width: 100%;
+  box-shadow: $box-shadow-md;
+  height: 60px;
+
+  &__nav {
+    max-width: 1400px;
+    margin-inline: auto;
+    height: 100%;
+
+    ul {
+      height: 100%;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+  }
+}
