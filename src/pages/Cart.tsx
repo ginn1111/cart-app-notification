@@ -1,31 +1,35 @@
-import CartItem from '../components/Cart/CartItem';
-import Button from '../components/common/Button';
-import { useMemo } from 'react';
-import { useAppSelector } from '../app/hooks';
-import { PRODUCT_LIST_DUMMY } from './../pages/ProductList';
+import CartItem from 'components/Cart/CartItem';
+import Button from 'components/common/Button';
+import useCart from 'hooks/useCart';
+import usePermission from 'hooks/usePermission';
 
 import classes from './Cart.module.scss';
 
 const Cart = () => {
-  const cartItems = useAppSelector((state) => state.cart.items);
+  const { cartItems, total } = useCart();
+  usePermission('notifications');
 
-  const items = useAppSelector((state) => state.cart.items);
-
-  const total = useMemo(() => {
-    const findProductById = (productId: number) =>
-      PRODUCT_LIST_DUMMY.find(({ id }) => id === productId) ?? { price: 0 };
-    return items.reduce(
-      (total, item) =>
-        total + findProductById(item.productId).price * item.amount,
-      0
-    );
-  }, [items, PRODUCT_LIST_DUMMY]);
+  const checkoutHandler = async () => {
+    try {
+      const status = await navigator.permissions.query({
+        name: 'notifications',
+      });
+      if (status.state !== 'granted') {
+        Notification.requestPermission();
+      } else {
+        new Notification('Order successfully!', {
+          body: `Thanks for your order!\n Total: ${total}`,
+        });
+      }
+    } catch (error) {}
+  };
 
   return (
     <section className={classes.cart}>
       <div className={classes.cart__list}>
         <ul className={classes.cart__list__header}>
           <li>Product</li>
+          <li>Price</li>
           <li>Amount</li>
         </ul>
         <ul className={classes.cart__list__item}>
@@ -35,8 +39,12 @@ const Cart = () => {
         </ul>
       </div>
       <div className={classes.cart__information}>
-        <p>{total}</p>
-        <Button>Checkout</Button>
+        <p>Total: {total}</p>
+        <div className={classes.cart__information__btn}>
+          <Button onClick={total !== 0 ? checkoutHandler : () => {}}>
+            Checkout
+          </Button>
+        </div>
       </div>
     </section>
   );

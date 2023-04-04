@@ -1,17 +1,13 @@
-import { addToCart } from '../../app/cartSlice';
-import { useAppDispatch } from '../../app/hooks';
-import Button from '../common/Button';
-import Card from '../common/Card';
-import classes from './ProductItem.module.scss';
 import { Link } from 'react-router-dom';
 
-type ProductItemProps = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-};
+import { addToCart } from 'app/cartSlice';
+import { useAppDispatch } from 'app/hooks';
+import Button from 'components/common/Button';
+import Card from 'components/common/Card';
+
+import classes from './ProductItem.module.scss';
+
+type ProductItemProps = {} & Product;
 
 const ProductItem = ({
   id,
@@ -30,7 +26,7 @@ const ProductItem = ({
   return (
     <Card>
       <div className={classes.product}>
-        <Link to={`/product/${id}`}>
+        <Link to={`/product/${id}`} className={classes.product__link}>
           <div className={classes.product__img}>
             <img src={imageUrl} alt={`Product ${name}`} />
           </div>

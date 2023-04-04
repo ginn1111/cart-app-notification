@@ -2,15 +2,45 @@
 
 .cart {
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 6fr 4fr;
+  gap: 40px;
+
   &__list {
     &__header {
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid $primary;
       display: flex;
       justify-content: space-evenly;
 
+      li:first-child {
+        text-align: center;
+      }
+
       li {
+        color: $primary;
+        font-weight: 600;
         width: 100%;
       }
+    }
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    li {
+      text-align: end;
+    }
+  }
+  &__information {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    p {
+      border-bottom: 1px solid $primary;
+      padding-bottom: 12px;
     }
   }
 }

@@ -1,39 +1,20 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
-type CartItem = {
-  id: string;
-  productId: number;
-  amount: number;
-};
-
-type Cart = {
-  loadingStatus: 'idle' | 'pending' | 'success' | 'error';
-  error: any;
-  items: Array<CartItem>;
-};
-
-const INITIAL_STATE: Cart = {
+const INITIAL_STATE: CartSliceType = {
   items: [],
   loadingStatus: 'idle',
   error: null,
 };
 
 const cartSlice = createSlice({
-  name: 'cartSlice',
+  name: 'cart',
   initialState: INITIAL_STATE,
   reducers: {
     addToCart: {
       reducer: (state, action: PayloadAction<CartItem>) => {
-        const oldItem = state.items.find(
-          (item) => item.productId === action.payload.productId
-        );
-        if (oldItem) {
-          oldItem.amount += action.payload.amount;
-        } else {
-          state.items.push(action.payload);
-        }
+        state.loadingStatus = 'pending';
       },
-      prepare: (amount: number, productId: number) => ({
+      prepare: (amount: number, productId: string) => ({
         payload: {
           amount,
           productId,
@@ -41,9 +22,40 @@ const cartSlice = createSlice({
         },
       }),
     },
+    setCartItems: (state, action: PayloadAction<CartItem>) => {
+      state.loadingStatus = 'success';
+      const oldItem = state.items.find(
+        (item) => item.productId === action.payload.productId
+      );
+      if (oldItem) {
+        oldItem.amount += action.payload.amount;
+      } else {
+        state.items.push(action.payload);
+      }
+    },
+    setError: (state, action) => {
+      Object.assign(state, {
+        loadingStatus: 'error',
+        error: action.payload,
+      });
+    },
+    deleteCartItem: (state, action) => {
+      state.loadingStatus = 'pending';
+    },
+    deleteCartItemSuccess: (state, action) => {
+      const idx = state.items.findIndex((item) => item.id === action.payload);
+      idx !== -1 && state.items.splice(idx, 1);
+      state.loadingStatus = 'success';
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { addToCart } = cartSlice.actions;
+export const {
+  deleteCartItem,
+  deleteCartItemSuccess,
+  addToCart,
+  setError,
+  setCartItems,
+} = cartSlice.actions;
 export default cartSlice.reducer;

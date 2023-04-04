@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import classes from './DefaultLayout.module.scss';
-import Header from '../common/Header/Header';
+import Header from 'components/common/Header/Header';
 
 const DefaultLayout = () => {
   return (

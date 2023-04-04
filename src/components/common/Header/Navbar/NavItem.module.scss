@@ -1,7 +1,11 @@
 @use '../../../../styles/' as *;
 
-.isActive {
+.nav-item {
   padding-block: 8px;
+  cursor: pointer;
+}
+
+.nav-item--active {
   color: $primary;
   border-bottom-style: solid;
   border-bottom-color: $primary;

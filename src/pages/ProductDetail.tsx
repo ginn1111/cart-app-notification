@@ -1,27 +1,43 @@
-import { useParams } from 'react-router-dom';
-import AmountButton from '../components/common/AmountButton';
-import classes from './ProductDetail.module.scss';
-import Button from '../components/common/Button';
-import { PRODUCT_LIST_DUMMY } from './ProductList';
 import { useRef } from 'react';
-import type { AmountProps } from '../components/common/AmountButton';
-import { useAppDispatch } from '../app/hooks';
-import { addToCart } from '../app/cartSlice';
+import { useParams } from 'react-router-dom';
+
+import AmountButton from 'components/common/AmountButton';
+import Button from 'components/common/Button';
+import type { AmountProps } from 'components/common/AmountButton';
+
+import useProduct from 'hooks/useProduct';
+import useError from 'hooks/useError';
+
+import { addToCart } from 'app/cartSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { cartStatusSelector } from 'app/cartSlice/selectors';
+
+import classes from './ProductDetail.module.scss';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const amountRef = useRef<AmountProps>(null);
+  const loadingStatus = useAppSelector(cartStatusSelector);
+  const message = useError('cart');
   const dispatch = useAppDispatch();
 
+  const { isLoading, isError, product, errorMessage } = useProduct();
+
+  const isLoadingAddToCart = loadingStatus === 'pending';
+
+  // Toast error
+  const isErroRAddToCart = loadingStatus === 'error';
+
   const addToCartHandler = () => {
-    if (id) {
-      dispatch(addToCart(amountRef?.current?.amount ?? 0, Number(id)));
-    }
+    id && dispatch(addToCart(amountRef?.current?.amount ?? 0, id));
   };
 
-  let product;
-  if (id) {
-    product = PRODUCT_LIST_DUMMY.find((product) => product.id === Number(id));
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>{errorMessage}</p>;
   }
 
   return (
@@ -38,7 +54,9 @@ const ProductDetail = () => {
           <AmountButton ref={amountRef} initValue={1} />
         </div>
         <div className={classes.product__information__add}>
-          <Button onClick={addToCartHandler}>Add to cart</Button>
+          <Button loading={isLoadingAddToCart} onClick={addToCartHandler}>
+            Add to cart
+          </Button>
         </div>
       </div>
     </div>

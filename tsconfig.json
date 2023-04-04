@@ -14,12 +14,22 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
+    "baseUrl": "src",
     "paths": {
-      "@styles": [
-        "./src/styles"
+      "services/*": [
+        "services/*"
       ],
-      "@components": [
-        "./src/components"
+      "hooks/*": [
+        "hooks/*"
+      ],
+      "constants/*": [
+        "constants/*"
+      ],
+      "app/*": [
+        "app/*"
+      ],
+      "components/*": [
+        "components/*"
       ]
     },
     "moduleResolution": "node",

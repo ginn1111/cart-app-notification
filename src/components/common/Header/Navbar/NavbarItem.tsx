@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './NavItem.module.scss';
 
@@ -18,7 +18,11 @@ const NavbarItem = ({
   return (
     <NavLink
       to={link}
-      className={({ isActive }) => (isActive ? classes.isActive : '')}
+      className={({ isActive }) =>
+        (isActive ? classes['nav-item--active'] : '') +
+        ' ' +
+        classes['nav-item']
+      }
     >
       {leadIcon}
       {children}

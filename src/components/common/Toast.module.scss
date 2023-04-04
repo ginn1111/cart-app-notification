@@ -1,0 +1,13 @@
+.toast {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+
+  &__title {
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+  &__message {
+    font-size: 14px;
+  }
+}
