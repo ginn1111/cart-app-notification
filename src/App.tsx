@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -47,7 +47,7 @@ function App() {
   }, []);
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <>
       <Routes>
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<ProductList />} />
@@ -69,7 +69,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-    </Suspense>
+    </>
   );
 }
 

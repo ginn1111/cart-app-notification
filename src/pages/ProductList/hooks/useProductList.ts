@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   productListSelector,
@@ -7,18 +7,19 @@ import {
 import { getListProduct } from 'app/productSlice';
 import useError from 'hooks/useError';
 
+const INIT_PAGINATION = { p: 1, l: 10 };
+
 const useProductList = () => {
   const productList = useAppSelector(productListSelector);
   const productStatus = useAppSelector(productStatusSelector);
   const message = useError('product');
   const dispatch = useAppDispatch();
 
-  const oldLengthRef = useRef(0);
+  const paginationRef = useRef(INIT_PAGINATION);
   const intersectionRef = useRef<IntersectionObserver>();
   const rootRef = useRef<HTMLUListElement>(null);
 
-  const [pagination, setPagination] = useState({ p: 1, l: 10 });
-
+  const isStart = productStatus === 'idle';
   const isLoading = productStatus === 'pending';
   const isError = productStatus === 'error';
 
@@ -32,17 +33,16 @@ const useProductList = () => {
         /**
          * old length < product list (when the amount of data reach to the end)
          */
+        const { p, l } = paginationRef.current;
+        const oldLen = p * l;
         if (
-          oldLengthRef.current < productList.length &&
+          oldLen <= productList.length &&
           !isLoading &&
           entries[0].isIntersecting
         ) {
-          setPagination((pagination) => ({
-            ...pagination,
-            p: pagination.p + 1,
-          }));
+          paginationRef.current.p = p + 1;
 
-          oldLengthRef.current = pagination.l * pagination.p;
+          dispatch(getListProduct({ params: paginationRef.current }));
 
           intersectionRef.current?.unobserve(entry);
         }
@@ -56,8 +56,8 @@ const useProductList = () => {
   };
 
   useEffect(() => {
-    dispatch(getListProduct({ params: pagination }));
-  }, [dispatch, pagination]);
+    isStart && dispatch(getListProduct({ params: INIT_PAGINATION }));
+  }, [dispatch, isStart]);
 
   return {
     isLoading,

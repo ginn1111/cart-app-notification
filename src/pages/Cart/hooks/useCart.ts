@@ -16,13 +16,9 @@ const useCart = () => {
     }));
   }, [_cartItems, productList]);
 
-  const total = useMemo(
-    () =>
-      cartItems.reduce(
-        (acc, item) => acc + (item?.price ?? 0) * item.amount,
-        0
-      ),
-    [cartItems]
+  const total = cartItems.reduce(
+    (acc, item) => acc + (item?.price ?? 0) * item.amount,
+    0
   );
 
   return { cartItems, total };
