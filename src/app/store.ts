@@ -3,14 +3,12 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
 import cartReducer from './cartSlice';
 import productReducer from './productSlice';
-import permissionReducer from './permissionSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = {
   cart: cartReducer,
   product: productReducer,
-  permissions: permissionReducer,
 };
 
 const store = configureStore({

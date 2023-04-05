@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import AmountButton from 'components/common/AmountButton';
@@ -13,20 +13,24 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { cartStatusSelector } from 'app/cartSlice/selectors';
 
 import classes from './ProductDetail.module.scss';
+import { toast } from 'react-toastify';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const amountRef = useRef<AmountProps>(null);
   const loadingStatus = useAppSelector(cartStatusSelector);
-  const message = useError('cart');
+  const errorAddToCart = useError('cart');
   const dispatch = useAppDispatch();
 
   const { isLoading, isError, product, errorMessage } = useProduct();
 
   const isLoadingAddToCart = loadingStatus === 'pending';
 
-  // Toast error
   const isErroRAddToCart = loadingStatus === 'error';
+
+  useEffect(() => {
+    isErroRAddToCart && toast(errorAddToCart, { type: 'error' });
+  }, [isErroRAddToCart, errorAddToCart]);
 
   const addToCartHandler = () => {
     id && dispatch(addToCart(amountRef?.current?.amount ?? 0, id));

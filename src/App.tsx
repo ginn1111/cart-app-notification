@@ -10,8 +10,6 @@ import { getTokenMessaging, onMessageListener } from 'services/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import Toast from 'components/common/Toast';
 
-import 'react-toastify/dist/ReactToastify.css';
-
 function App() {
   usePermission('notifications');
   useEffect(() => {

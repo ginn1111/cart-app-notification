@@ -8,13 +8,16 @@ import {
 } from '.';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { cartAPI } from '../../services/api';
+import { toast } from 'react-toastify';
 
 export function* addToCartSaga(action: PayloadAction<CartItem>) {
   try {
     const { data } = yield call(cartAPI.add, action.payload);
+    toast('Add to cart successfully!', { type: 'success' });
     yield put(setCartItems(data));
   } catch (error) {
     yield put(setError(error));
+    toast('Add to cart failed!', { type: 'error' });
   }
 }
 

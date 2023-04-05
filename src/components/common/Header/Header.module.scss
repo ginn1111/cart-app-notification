@@ -1,9 +1,12 @@
 @use '../../../styles/' as *;
 
 .header {
+  position: sticky;
+  top: 0;
   width: 100%;
   box-shadow: $box-shadow-md;
   height: 60px;
+  backdrop-filter: blur(14px);
 
   &__nav {
     max-width: 1400px;

@@ -5,6 +5,10 @@
   grid-template-columns: 6fr 4fr;
   gap: 40px;
 
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+
   &__list {
     &__header {
       padding-bottom: 12px;
@@ -27,6 +31,12 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+
+      @include mobile {
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 12px;
+      }
     }
 
     li {
@@ -41,6 +51,43 @@
     p {
       border-bottom: 1px solid $primary;
       padding-bottom: 12px;
+    }
+  }
+}
+
+.shop-now {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  .btn {
+    padding: 12px 20px;
+    color: $primary;
+    border-radius: $rounded-md;
+    border: 1px solid $primary;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: all 200ms ease-in-out 300ms;
+
+    &::before {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform-origin: left;
+      transition: all 300ms ease-in;
+      background-color: $primary;
+      transform: scaleX(0);
+    }
+
+    &:hover {
+      color: $white;
+      &::before {
+        transform: scaleX(1);
+      }
     }
   }
 }

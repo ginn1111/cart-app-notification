@@ -1,31 +1,23 @@
 import { Link } from 'react-router-dom';
 
-import { addToCart } from 'app/cartSlice';
-import { useAppDispatch } from 'app/hooks';
 import Button from 'components/common/Button';
 import Card from 'components/common/Card';
 
 import classes from './ProductItem.module.scss';
+import useAddToCart from 'hooks/useAddToCart';
+import { LegacyRef, forwardRef } from 'react';
 
 type ProductItemProps = {} & Product;
 
-const ProductItem = ({
-  id,
-  name,
-  description,
-  price,
-  imageUrl,
-}: ProductItemProps) => {
-  const dispatch = useAppDispatch();
-
-  const addToCartHandler = (e: any) => {
-    e.stopPropagation();
-    dispatch(addToCart(1, id));
-  };
+const ProductItem = (
+  { id, name, description, price, imageUrl }: ProductItemProps,
+  ref: LegacyRef<HTMLDivElement> | ((instance: HTMLDivElement) => void)
+) => {
+  const { isLoading, addToCartHandler } = useAddToCart(id);
 
   return (
     <Card>
-      <div className={classes.product}>
+      <div className={classes.product} ref={ref}>
         <Link to={`/product/${id}`} className={classes.product__link}>
           <div className={classes.product__img}>
             <img src={imageUrl} alt={`Product ${name}`} />
@@ -41,11 +33,13 @@ const ProductItem = ({
           </div>
         </Link>
         <div className={classes.product__information__controls}>
-          <Button onClick={addToCartHandler}>Add to cart</Button>
+          <Button loading={isLoading} onClick={addToCartHandler}>
+            Add to cart
+          </Button>
         </div>
       </div>
     </Card>
   );
 };
 
-export default ProductItem;
+export default forwardRef(ProductItem);

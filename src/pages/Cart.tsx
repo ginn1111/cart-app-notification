@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import CartItem from 'components/Cart/CartItem';
 import Button from 'components/common/Button';
 import useCart from 'hooks/useCart';
@@ -23,6 +24,16 @@ const Cart = () => {
       }
     } catch (error) {}
   };
+
+  if (cartItems.length === 0) {
+    return (
+      <div className={classes['shop-now']}>
+        <Link to="/" className={classes.btn}>
+          <p>Shop now</p>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <section className={classes.cart}>

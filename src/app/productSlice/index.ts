@@ -10,13 +10,13 @@ const productSlice = createSlice({
   name: 'product',
   initialState: INITIAL_STATE,
   reducers: {
-    getListProduct(state) {
+    getListProduct(state, action) {
       state.loadingStatus = 'pending';
     },
     setListProduct(state, action) {
       Object.assign(state, {
         loadingStatus: 'success',
-        productList: action.payload,
+        productList: state.productList.concat(action.payload),
       });
     },
     setError(state, action) {

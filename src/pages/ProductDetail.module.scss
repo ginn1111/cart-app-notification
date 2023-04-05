@@ -31,14 +31,34 @@
     &__description {
       font-style: italic;
       color: $text;
-      font-size: 14px;
+      font-size: 12px;
+      position: relative;
+      margin-top: 40px;
+
+      &::before {
+        position: absolute;
+        top: -20px;
+        content: 'Description';
+        font-style: normal;
+        color: $text-2;
+        font-size: 14px;
+      }
     }
     &__amount {
-      margin-block: 40px 20px;
+      margin-block: 32px 20px;
       width: 200px;
     }
     &__add {
       width: 200px;
+    }
+
+    @include mobile {
+      &__add {
+        width: 100%;
+      }
+      &__amount {
+        width: 100%;
+      }
     }
   }
 }
