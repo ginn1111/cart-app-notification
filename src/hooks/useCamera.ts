@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 const useCamera = (videoRef: RefObject<HTMLMediaElement>) => {
   const [isUserMode, setIsUserMode] = useState(true); // 'user' mode is default
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     let _stream: MediaStream;
@@ -20,6 +21,7 @@ const useCamera = (videoRef: RefObject<HTMLMediaElement>) => {
             videoRef.current.srcObject = _stream;
           }
         } catch (error) {
+          setIsError(true);
           toast('Not found any devices!', {
             type: 'error',
           });
@@ -35,6 +37,6 @@ const useCamera = (videoRef: RefObject<HTMLMediaElement>) => {
     };
   }, [isUserMode, videoRef]);
 
-  return { setIsUserMode };
+  return { setIsUserMode, isError };
 };
 export default useCamera;

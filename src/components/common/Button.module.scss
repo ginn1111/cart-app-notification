@@ -6,17 +6,26 @@
   font-size: 14px;
   border-radius: $rounded-sm;
   text-align: center;
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+.button:not(:disabled) {
   &:hover {
     cursor: pointer;
     opacity: 0.5;
+    user-select: none;
   }
-}
-.button.primary {
-  color: $white;
-  background-color: $primary;
-}
-.button.outline {
-  color: $primary;
-  background-color: $white;
-  border: 1px solid $primary;
+
+  #{&}__primary {
+    color: $white;
+    background-color: $primary;
+  }
+
+  #{&}__outline {
+    color: $primary;
+    background-color: $white;
+    border: 1px solid $primary;
+  }
 }

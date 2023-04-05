@@ -16,11 +16,13 @@ const Button = ({
   variant = 'primary',
   children,
   className,
+  disabled,
   ...rest
 }: ButtonProps) => {
   return (
     <button
       className={cx(classes.button, classes[variant], className)}
+      disabled={disabled}
       {...rest}
     >
       {loading && <p>Loading...</p>}

@@ -5,14 +5,22 @@ import { useRef } from 'react';
 
 const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { setIsUserMode } = useCamera(videoRef);
+  const { setIsUserMode, isError } = useCamera(videoRef);
 
   return (
     <section>
-      <video autoPlay className={classes.camera} ref={videoRef} />
+      <video autoPlay className={classes.camera} ref={videoRef}>
+        {!navigator.mediaDevices.getDisplayMedia && (
+          <p>Your browser do not support!</p>
+        )}
+        {!!navigator.mediaDevices.getDisplayMedia && isError && (
+          <p>Not found any devices!</p>
+        )}
+      </video>
       <Button
         className={classes['camera__switch-btn']}
         onClick={() => setIsUserMode((mode) => !mode)}
+        disabled={isError}
       >
         Toggle mode
       </Button>
