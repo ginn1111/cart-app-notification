@@ -1,18 +1,19 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import ProductList from 'pages/ProductList/ProductList';
-import ProductDetail from 'pages/ProductDetail/ProductDetail';
-import Cart from 'pages/Cart/Cart';
-import NotFound from 'pages/NotFound/NotFound';
-import Camera from 'pages/Camera/Camera';
 
 import usePermission from 'hooks/usePermission';
 
 import DefaultLayout from 'components/layout/DefaultLayout';
 import Toast from 'components/common/Toast/Toast';
 import { getTokenMessaging, onMessageListener } from 'services/firebase';
+
+const Cart = lazy(() => import('pages/Cart/Cart'));
+const NotFound = lazy(() => import('pages/NotFound/NotFound'));
+const Camera = lazy(() => import('pages/Camera/Camera'));
+const ProductDetail = lazy(() => import('pages/ProductDetail/ProductDetail'));
 
 function App() {
   usePermission('notifications');
@@ -46,7 +47,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Suspense fallback={<p>Loading...</p>}>
       <Routes>
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<ProductList />} />
@@ -68,7 +69,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-    </>
+    </Suspense>
   );
 }
 
