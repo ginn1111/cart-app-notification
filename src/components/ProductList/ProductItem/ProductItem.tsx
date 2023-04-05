@@ -34,7 +34,11 @@ const ProductItem = (
           </div>
         </Link>
         <div className="product-item__information__controls">
-          <Button loading={isLoading} onClick={addToCartHandler}>
+          <Button
+            disabled={isLoading}
+            loading={isLoading}
+            onClick={addToCartHandler}
+          >
             Add to cart
           </Button>
         </div>
