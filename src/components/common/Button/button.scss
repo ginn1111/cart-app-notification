@@ -1,0 +1,34 @@
+@import '../../../sassStyles/variables';
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: $rounded-sm;
+  text-align: center;
+
+  &:not(:disabled) {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+      user-select: none;
+    }
+  }
+
+  &.primary {
+    color: $white;
+    background-color: $primary;
+  }
+
+  &.outline {
+    color: $primary;
+    background-color: $white;
+    border: 1px solid $primary;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}

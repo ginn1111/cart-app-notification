@@ -1,0 +1,69 @@
+@import '../../../sassStyles/variables';
+@import '../../../sassStyles/mixins';
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  button {
+    color: $red;
+    cursor: pointer;
+    font-size: 32px;
+  }
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  p {
+    width: 100%;
+  }
+
+  &__information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+
+    &__img {
+      aspect-ratio: 3/2;
+      border-radius: $rounded-md;
+      overflow: hidden;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    &__name {
+      text-align: start;
+      font-size: 15px;
+      flex-grow: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      align-items: center;
+      &__img {
+        width: 100%;
+        aspect-ratio: 2;
+      }
+      &__name {
+        font-size: 14px;
+      }
+    }
+  }
+}

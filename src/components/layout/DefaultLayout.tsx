@@ -1,12 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import classes from './DefaultLayout.module.scss';
 import Header from 'components/common/Header/Header';
+
+import './defaultLayout.scss';
 
 const DefaultLayout = () => {
   return (
     <>
       <Header />
-      <main className={classes['default-layout']}>
+      <main className="default-layout">
         <Outlet />
       </main>
     </>

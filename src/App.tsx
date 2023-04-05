@@ -1,15 +1,18 @@
-import { Routes, Route } from 'react-router-dom';
-import ProductList from './pages/ProductList';
-import ProductDetail from './pages/ProductDetail';
-import Cart from './pages/Cart';
-import NotFound from './pages/NotFound';
-import DefaultLayout from './components/layout/DefaultLayout';
-import usePermission from './hooks/usePermission';
 import { useEffect } from 'react';
-import { getTokenMessaging, onMessageListener } from 'services/firebase';
+import { Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import Toast from 'components/common/Toast';
-import Camera from 'pages/Camera';
+
+import ProductList from 'pages/ProductList/ProductList';
+import ProductDetail from 'pages/ProductDetail/ProductDetail';
+import Cart from 'pages/Cart/Cart';
+import NotFound from 'pages/NotFound/NotFound';
+import Camera from 'pages/Camera/Camera';
+
+import usePermission from 'hooks/usePermission';
+
+import DefaultLayout from 'components/layout/DefaultLayout';
+import Toast from 'components/common/Toast/Toast';
+import { getTokenMessaging, onMessageListener } from 'services/firebase';
 
 function App() {
   usePermission('notifications');

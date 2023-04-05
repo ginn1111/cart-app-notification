@@ -1,0 +1,9 @@
+.camera {
+  display: block;
+  margin-inline: auto;
+  height: 300px;
+
+  &__switch-btn {
+    margin-top: 20px;
+  }
+}

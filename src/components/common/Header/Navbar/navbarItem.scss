@@ -1,0 +1,14 @@
+@import '../../../../sassStyles//variables';
+
+.nav-item {
+  padding-block: 8px;
+  cursor: pointer;
+  position: relative;
+
+  &--active {
+    color: $primary;
+    border-bottom-style: solid;
+    border-bottom-color: $primary;
+    border-bottom-width: 2px;
+  }
+}

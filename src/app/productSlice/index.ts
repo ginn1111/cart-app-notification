@@ -4,6 +4,7 @@ const INITIAL_STATE: ProductSliceType = {
   productList: [],
   loadingStatus: 'idle',
   error: null,
+  product: null,
 };
 
 const productSlice = createSlice({
@@ -25,10 +26,24 @@ const productSlice = createSlice({
         error: action.payload,
       });
     },
+    getProduct(state, action) {
+      state.loadingStatus = 'pending';
+    },
+    setProduct(state, action) {
+      Object.assign(state, {
+        loadingStatus: 'success',
+        product: action.payload,
+      });
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { getListProduct, setListProduct, setError } =
-  productSlice.actions;
+export const {
+  getListProduct,
+  setListProduct,
+  setError,
+  getProduct,
+  setProduct,
+} = productSlice.actions;
 export default productSlice.reducer;

@@ -21,6 +21,7 @@ declare global {
 
   export type ProductSliceType = {
     productList: Array<Product>;
+    product: Product | null;
   } & Status;
 
   export type Status = {

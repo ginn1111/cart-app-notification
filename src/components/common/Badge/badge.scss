@@ -1,0 +1,22 @@
+@import '../../../sassStyles/variables';
+@import '../../../sassStyles/animations';
+
+.badge {
+  position: absolute;
+  bottom: -4px;
+  right: -8px;
+  background-color: $primary;
+  font-size: 14px;
+  color: $white;
+  border-radius: $rounded-full;
+  padding: 4px;
+  height: 20px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__bums {
+    animation: bums 200ms ease-in-out;
+  }
+}

@@ -1,0 +1,9 @@
+@import '../../../sassStyles/variables';
+
+.card {
+  padding: 16px 20px;
+  height: 100%;
+  background-color: $white;
+  border-radius: $rounded-md;
+  box-shadow: $box-shadow-md;
+}

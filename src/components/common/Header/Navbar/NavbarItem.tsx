@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import classes from './NavItem.module.scss';
+
+import './navbarItem.scss';
 
 type NavbarItemProps = {
   link: string;
@@ -19,9 +20,7 @@ const NavbarItem = ({
     <NavLink
       to={link}
       className={({ isActive }) =>
-        (isActive ? classes['nav-item--active'] : '') +
-        ' ' +
-        classes['nav-item']
+        (isActive ? 'nav-item--active' : '') + ' nav-item'
       }
     >
       {leadIcon}

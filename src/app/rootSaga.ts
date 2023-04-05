@@ -1,13 +1,9 @@
 import { all } from 'redux-saga/effects';
-import { getListProductWatcher } from './productSlice/saga';
+import { rootProductSaga } from './productSlice/saga';
 import { addToCartWatcher, deleteCartItemWatcher } from './cartSlice/saga';
 
 function* rootSaga() {
-  yield all([
-    getListProductWatcher(),
-    addToCartWatcher(),
-    deleteCartItemWatcher(),
-  ]);
+  yield all([rootProductSaga(), addToCartWatcher(), deleteCartItemWatcher()]);
 }
 
 export default rootSaga;

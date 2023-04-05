@@ -1,0 +1,25 @@
+@import '../../../sassStyles/variables';
+
+.header {
+  position: fixed;
+  inset: 0;
+  bottom: unset;
+
+  box-shadow: $box-shadow-md;
+  height: $header-height;
+  backdrop-filter: blur(14px);
+
+  &__nav {
+    max-width: 1400px;
+    margin-inline: auto;
+    height: 100%;
+
+    ul {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding-inline: 32px;
+    }
+  }
+}

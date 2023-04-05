@@ -1,8 +1,10 @@
 import NavbarItem from './Navbar/NavbarItem';
-import Badge from '../Badge';
-import classes from './Header.module.scss';
+import Badge from '../Badge/Badge';
 import { useAppSelector } from 'app/hooks';
 import { cartItemsSelector } from 'app/cartSlice/selectors';
+
+import './header.scss';
+import { useRef, useEffect } from 'react';
 
 const NAV_ITEMS = [
   { id: 1, title: 'Home', link: '/' },
@@ -12,16 +14,33 @@ const NAV_ITEMS = [
 
 const Header = () => {
   const cartItems = useAppSelector(cartItemsSelector);
+  const badgeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    badgeRef?.current?.classList.add('badge__bums');
+    const timerId = setTimeout(() => {
+      if (badgeRef.current) {
+        badgeRef.current.classList.remove('badge__bums');
+        return () => clearTimeout(timerId);
+      }
+    }, 500);
+
+    return () => {
+      if (badgeRef.current) {
+        badgeRef.current.classList.remove('.badge__bums');
+      }
+    };
+  }, [cartItems.length]);
 
   return (
-    <header className={classes.header}>
-      <nav className={classes.header__nav}>
+    <header className="header">
+      <nav className="header__nav">
         <ul>
           {NAV_ITEMS.map((nav) => (
             <NavbarItem key={nav.id} link={nav.link}>
               <p>{nav.title}</p>
               {nav.link === '/cart' && cartItems.length > 0 && (
-                <Badge>{cartItems.length}</Badge>
+                <Badge ref={badgeRef}>{cartItems.length}</Badge>
               )}
             </NavbarItem>
           ))}

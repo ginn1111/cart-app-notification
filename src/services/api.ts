@@ -6,6 +6,7 @@ const instance = axios.create({
 
 const Url = {
   GET_PRODUCT_LIST: '/products',
+  GET_PRODUCT: (id: string) => `/products/${id}`,
   GET_CART: '/cart',
   ADD_TO_CART: '/cart',
   DELETE_ITEM_CART: (id: string) => `/cart/${encodeURIComponent(id)}`,
@@ -14,6 +15,8 @@ const Url = {
 export const productAPI = {
   get: (config?: AxiosRequestConfig) =>
     instance.get(Url.GET_PRODUCT_LIST, config),
+  getDetail: (id: string, config?: AxiosRequestConfig) =>
+    instance.get(Url.GET_PRODUCT(id), config),
 };
 
 export const cartAPI = {

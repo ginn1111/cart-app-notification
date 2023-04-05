@@ -12,3 +12,8 @@ export const productStatusSelector = createSelector(
   productSelector,
   (product) => product.loadingStatus
 );
+
+export const productDetailSelector = createSelector(
+  productSelector,
+  (product) => product.product
+);
