@@ -44,21 +44,13 @@
         font-size: 14px;
       }
     }
-    &__amount {
-      margin-block: 32px 20px;
-      width: 200px;
-    }
     &__add {
       width: 200px;
+      max-width: 100%;
     }
-
-    @include mobile {
-      &__add {
-        width: 100%;
-      }
-      &__amount {
-        width: 100%;
-      }
+    &__amount {
+      margin-block: 32px 20px;
+      @extend .product__information__add;
     }
   }
 }

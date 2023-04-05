@@ -1,11 +1,13 @@
 @use '../../../styles/' as *;
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   box-shadow: $box-shadow-md;
-  height: 60px;
+  height: $header-height;
   backdrop-filter: blur(14px);
 
   &__nav {
