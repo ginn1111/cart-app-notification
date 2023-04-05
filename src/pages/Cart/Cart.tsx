@@ -28,11 +28,11 @@ const Cart = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="shop-now">
+      <button className="shop-now">
         <Link to="/" className="btn">
           <p>Shop now</p>
         </Link>
-      </div>
+      </button>
     );
   }
 

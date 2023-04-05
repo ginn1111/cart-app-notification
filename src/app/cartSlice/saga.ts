@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, all } from 'redux-saga/effects';
 import {
   addToCart,
   deleteCartItem,
@@ -30,10 +30,14 @@ export function* deleteCartItemSaga(action: PayloadAction<string>) {
   }
 }
 
-export function* addToCartWatcher() {
+function* addToCartWatcher() {
   yield takeEvery(addToCart.toString(), addToCartSaga);
 }
 
-export function* deleteCartItemWatcher() {
+function* deleteCartItemWatcher() {
   yield takeEvery(deleteCartItem.toString(), deleteCartItemSaga);
+}
+
+export function* rootCartSaga() {
+  yield all([addToCartWatcher(), deleteCartItemWatcher()]);
 }
