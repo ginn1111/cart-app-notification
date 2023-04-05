@@ -1,10 +1,12 @@
+import { useRef, useEffect } from 'react';
+
 import NavbarItem from './Navbar/NavbarItem';
 import Badge from '../Badge/Badge';
+
 import { useAppSelector } from 'app/hooks';
 import { cartItemsSelector } from 'app/cartSlice/selectors';
 
 import './header.scss';
-import { useRef, useEffect } from 'react';
 
 const NAV_ITEMS = [
   { id: 1, title: 'Home', link: '/' },
@@ -25,9 +27,11 @@ const Header = () => {
       }
     }, 500);
 
+    const badgeCleanup = badgeRef.current;
+
     return () => {
-      if (badgeRef.current) {
-        badgeRef.current.classList.remove('.badge__bums');
+      if (badgeCleanup) {
+        badgeCleanup.classList.remove('.badge__bums');
       }
     };
   }, [cartItems.length]);
