@@ -7,6 +7,7 @@ import { cartItemsSelector } from 'app/cartSlice/selectors';
 const NAV_ITEMS = [
   { id: 1, title: 'Home', link: '/' },
   { id: 2, title: 'Cart', link: '/cart' },
+  { id: 3, title: 'Camera', link: '/camera' },
 ];
 
 const Header = () => {

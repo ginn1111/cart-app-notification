@@ -15,10 +15,14 @@ const Button = ({
   loading = false,
   variant = 'primary',
   children,
+  className,
   ...rest
 }: ButtonProps) => {
   return (
-    <button className={cx(classes.button, classes[variant])} {...rest}>
+    <button
+      className={cx(classes.button, classes[variant], className)}
+      {...rest}
+    >
       {loading && <p>Loading...</p>}
       {!loading && children}
     </button>

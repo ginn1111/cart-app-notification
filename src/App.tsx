@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { getTokenMessaging, onMessageListener } from 'services/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import Toast from 'components/common/Toast';
+import Camera from 'pages/Camera';
 
 function App() {
   usePermission('notifications');
@@ -48,6 +49,7 @@ function App() {
           <Route path="/" element={<ProductList />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/camera" element={<Camera />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
