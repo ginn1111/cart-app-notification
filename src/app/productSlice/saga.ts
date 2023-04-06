@@ -1,11 +1,4 @@
-import {
-  all,
-  call,
-  put,
-  takeEvery,
-  takeLatest,
-  throttle,
-} from 'redux-saga/effects';
+import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import {
   getListProduct,
   paginationProduct,
