@@ -2,18 +2,19 @@ import { lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
-import ProductList from 'pages/ProductList/ProductList';
+import ProductList from 'pages/ProductList';
 
 import usePermission from 'hooks/usePermission';
 
 import DefaultLayout from 'components/layout/DefaultLayout';
-import Toast from 'components/common/Toast/Toast';
+import Toast from 'components/common/Toast';
+
 import { getTokenMessaging, onMessageListener } from 'services/firebase';
 
-const Cart = lazy(() => import('pages/Cart/Cart'));
-const NotFound = lazy(() => import('pages/NotFound/NotFound'));
-const Camera = lazy(() => import('pages/Camera/Camera'));
-const ProductDetail = lazy(() => import('pages/ProductDetail/ProductDetail'));
+const Cart = lazy(() => import('pages/Cart'));
+const NotFound = lazy(() => import('pages/NotFound'));
+const Camera = lazy(() => import('pages/Camera'));
+const ProductDetail = lazy(() => import('pages/ProductDetail'));
 
 function App() {
   usePermission('notifications');

@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import AmountButton from 'components/common/AmountButton/AmountButton';
-import Button from 'components/common/Button/Button';
-import type { AmountProps } from 'components/common/AmountButton/AmountButton';
+import AmountButton from 'components/common/AmountButton';
+import Button from 'components/common/Button';
+import type { AmountProps } from 'components/common/AmountButton';
 
 import useProduct from 'pages/ProductDetail/hooks/useProduct';
 import useError from 'hooks/useError';
@@ -11,8 +12,6 @@ import useError from 'hooks/useError';
 import { addToCart } from 'app/cartSlice';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { cartStatusSelector } from 'app/cartSlice/selectors';
-
-import { toast } from 'react-toastify';
 
 import './productDetail.scss';
 
@@ -26,7 +25,6 @@ const ProductDetail = () => {
   const { isLoading, isError, product, errorMessage } = useProduct();
 
   const isLoadingAddToCart = loadingStatus === 'pending';
-
   const isErroRAddToCart = loadingStatus === 'error';
 
   useEffect(() => {

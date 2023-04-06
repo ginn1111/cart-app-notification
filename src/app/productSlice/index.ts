@@ -17,7 +17,7 @@ const productSlice = createSlice({
     setListProduct(state, action) {
       Object.assign(state, {
         loadingStatus: 'success',
-        productList: state.productList.concat(action.payload),
+        productList: action.payload,
       });
     },
     setError(state, action) {
@@ -35,6 +35,15 @@ const productSlice = createSlice({
         product: action.payload,
       });
     },
+    paginationProduct(state, action) {
+      state.loadingStatus = 'pending';
+    },
+    setPagination(state, action) {
+      Object.assign(state, {
+        loadingStatus: 'success',
+        productList: state.productList.concat(action.payload),
+      });
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -45,5 +54,7 @@ export const {
   setError,
   getProduct,
   setProduct,
+  paginationProduct,
+  setPagination,
 } = productSlice.actions;
 export default productSlice.reducer;

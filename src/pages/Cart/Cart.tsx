@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import CartItem from 'components/Cart/CartItem/CartItem';
-import Button from 'components/common/Button/Button';
+import CartItem from 'components/Cart/CartItem';
+import Button from 'components/common/Button';
 
 import useCart from './hooks/useCart';
 import usePermission from 'hooks/usePermission';

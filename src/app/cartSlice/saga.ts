@@ -1,4 +1,7 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+
 import {
   addToCart,
   deleteCartItem,
@@ -6,9 +9,7 @@ import {
   setCartItems,
   setError,
 } from '.';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { cartAPI } from '../../services/api';
-import { toast } from 'react-toastify';
+import { cartAPI } from 'services/api';
 
 export function* addToCartSaga(action: PayloadAction<CartItem>) {
   try {

@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   productListSelector,
   productStatusSelector,
 } from 'app/productSlice/selectors';
-import { getListProduct } from 'app/productSlice';
+import { getListProduct, paginationProduct } from 'app/productSlice';
 import useError from 'hooks/useError';
 
 const INIT_PAGINATION = { p: 1, l: 10 };
 
-const useProductList = () => {
+const useProductList = (rootRef: RefObject<HTMLUListElement>) => {
   const productList = useAppSelector(productListSelector);
   const productStatus = useAppSelector(productStatusSelector);
   const message = useError('product');
@@ -17,9 +17,7 @@ const useProductList = () => {
 
   const paginationRef = useRef(INIT_PAGINATION);
   const intersectionRef = useRef<IntersectionObserver>();
-  const rootRef = useRef<HTMLUListElement>(null);
 
-  const isStart = productStatus === 'idle';
   const isLoading = productStatus === 'pending';
   const isError = productStatus === 'error';
 
@@ -42,12 +40,12 @@ const useProductList = () => {
         ) {
           paginationRef.current.p = p + 1;
 
-          dispatch(getListProduct({ params: paginationRef.current }));
+          dispatch(paginationProduct({ params: paginationRef.current }));
 
           intersectionRef.current?.unobserve(entry);
         }
       },
-      { root: rootRef.current, threshold: 1 }
+      { threshold: 1, root: rootRef.current }
     );
 
     if (entry) {
@@ -56,8 +54,9 @@ const useProductList = () => {
   };
 
   useEffect(() => {
-    isStart && dispatch(getListProduct({ params: INIT_PAGINATION }));
-  }, [dispatch, isStart]);
+    dispatch(getListProduct({ params: INIT_PAGINATION }));
+    paginationRef.current = { ...INIT_PAGINATION };
+  }, [dispatch]);
 
   return {
     isLoading,

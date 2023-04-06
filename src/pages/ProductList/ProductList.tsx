@@ -1,11 +1,14 @@
-import ProductItem from 'components/ProductList/ProductItem/ProductItem';
+import ProductItem from 'components/ProductList/ProductItem';
 import useProductList from 'pages/ProductList/hooks/useProductList';
 
 import './productList.scss';
+import { useRef } from 'react';
 
 const ProductList = () => {
+  const rootRef = useRef<HTMLUListElement>(null);
+
   const { productList, isError, isLoading, errorMessage, visualizeHandler } =
-    useProductList();
+    useProductList(rootRef);
 
   if (isError) {
     return <p>{errorMessage}</p>;

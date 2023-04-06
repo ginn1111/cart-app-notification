@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 
 import NavbarItem from './Navbar/NavbarItem';
-import Badge from '../Badge/Badge';
+import Badge from '../Badge';
 
 import { useAppSelector } from 'app/hooks';
 import { cartItemsSelector } from 'app/cartSlice/selectors';
